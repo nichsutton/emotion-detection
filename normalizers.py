@@ -1,6 +1,8 @@
 import numpy as np
 import librosa
 
+sampling_rate = 
+
 def noise(data):
     noise_amp = 0.035*np.random.uniform()*np.amax(data) 
     data = data + noise_amp*np.random.normal(size=data.shape[0])

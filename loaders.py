@@ -24,7 +24,8 @@ def load_ravdess(ravdess):
     filepath_df = pd.DataFrame(emotion_file_paths, columns=["Path"])
     ravdess_df = pd.concat([emotion_df, filepath_df], axis=1)
 
-    ravdess_df.Emotions.replace({1: "neutral", 2: "calm", 3: "happy", 4: "sad", 5: "angry", 6: "fearful", 7: "disgust", 8: "surprised"}, inplace=True)
+    #ravdess_df.Emotions.replace({1: "neutral", 2: "calm", 3: "happy", 4: "sad", 5: "angry", 6: "fearful", 7: "disgust", 8: "surprised"}, inplace=True)
+    ravdess_df.Emotions.replace({1: "neutral", 2: "neutral", 3: "happy", 4: "sad", 5: "angry", 6: "fear", 7: "fear", 8: "happy"}, inplace=True)
 
     return ravdess_df
 
@@ -45,6 +46,22 @@ def load_crema_d (crema_d):
             if audio_type == "a":
                 emotion_files.append("angry")
             elif audio_type == "d":
+                emotion_files.append("fear")
+            elif audio_type == "f":
+                emotion_files.append("fear")
+            elif audio_type == "h":
+                emotion_files.append("happy")
+            elif audio_type == "n":
+                emotion_files.append("neutral")
+            elif audio_type + "a" == "sa":
+                emotion_files.append("sad")
+            else:
+                emotion_files.append("happy")
+
+            """
+            if audio_type == "a":
+                emotion_files.append("angry")
+            elif audio_type == "d":
                 emotion_files.append("disgust")
             elif audio_type == "f":
                 emotion_files.append("fear")
@@ -56,6 +73,7 @@ def load_crema_d (crema_d):
                 emotion_files.append("sad")
             else:
                 emotion_files.append("surprised")
+            """
     except ValueError as identifier:
         print("Error:", identifier)
 
