@@ -1,10 +1,7 @@
-from os import WSTOPSIG
 import numpy as np
 import pandas as pd
 import warnings
 import sys
-from loaders import load_ravdess
-from loaders import load_crema_d
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
@@ -12,7 +9,6 @@ from sklearn.model_selection import train_test_split, StratifiedKFold
 from sklearn.metrics import confusion_matrix, classification_report
 from keras.callbacks import ReduceLROnPlateau, EarlyStopping
 from keras.models import Sequential
-#from keras.layers import Activation, Dense, Conv1D, Flatten, MaxPooling1D, Dropout, BatchNormalization
 from keras.layers import Conv1D, Activation, BatchNormalization, Dropout, MaxPooling1D, Flatten, Dense, LSTM, Bidirectional, Lambda, Dot, Softmax
 from keras.regularizers import l2
 
@@ -111,7 +107,7 @@ model.add(Dense(y_train.shape[1], activation='softmax'))
 
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
-# Define callbacks
+# callbacks
 rlrp = ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=5, min_lr=1e-6, verbose=1)
 early_stopping = EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True, verbose=1)
 
